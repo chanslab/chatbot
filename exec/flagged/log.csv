@@ -1,0 +1,2 @@
+text1,text2,image,output 0,output 1,flag,username,timestamp
+안녕,안녕,"{""path"":""flagged/image/645b6f6089db41c64437/yum_repolist.png"",""url"":""http://127.0.0.1:7860/file=/private/var/folders/n_/dtfd7mv16h7578hdbxl38wvh0000gp/T/gradio/5023d0b710055fbdd83e20359306f0932968a571/yum_repolist.png"",""size"":94180,""orig_name"":""yum_repolist.png"",""mime_type"":""""}",안녕안녕,"{""path"":""flagged/output 1/e40968e0f5c8a9c2121e/image.png"",""url"":null,""size"":null,""orig_name"":""image.png"",""mime_type"":null}",,,2024-04-29 14:02:13.945042
