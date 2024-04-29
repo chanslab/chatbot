@@ -91,9 +91,16 @@ print(completion.choices[0].message.content)
 ## graido 
 사용해 보니, 기본적인 내용은 HTML수준의 화면 구성으로 쉬움   
 streamlit은 계속 발전하고 있다는데, gradio는 어떤지 모르겠음
-
 https://www.gradio.app/docs/gradio/chatinterface
 
+### gradio - theme
+- gradio에서 기본적으로 제공되는 테마
+    - gr.themes.Base()
+    - gr.themes.Default()
+    - gr.themes.Glass()
+    - gr.themes.Monochrome()
+    - gr.themes.Soft()
 
-
+- 허깅페이스에 올라온 테마 설정 방법  
+https://huggingface.co/spaces/gradio/theme-gallery
 
