@@ -60,8 +60,25 @@ def translate_bot(output_conditions, ouput_language, input_text):
         )
         return completion.choices[0].message.content
 
+# 소설봇
+def novel_bot(model, temperature, detail):
+    completion=client.chat.completions.create(
+        model = model,
+        temperature= temperature,
+        messages=[
+            {
+                "role":"system",
+                "content":"당신은 소설가입니다. 요청하는 조건에 맞춰 소설을 작성해 주세요"
+            },
+            {
+                "role":"user",
+                "content": detail
+            }
+        ]
+    )
+    return completion.choices[0].message.content
 
-# 레이아웃 begin
+# 레이아웃 begin  *************************************************************************************
 
 with gr.Blocks(theme=gr.themes.Default()) as app:
     with gr.Tab("상담"):
@@ -158,8 +175,59 @@ with gr.Blocks(theme=gr.themes.Default()) as app:
             outputs=tb_output_text 
         )
     with gr.Tab("소설"):
-        pass
-
+        # 1
+        gr.Markdown(
+            value="""
+            # <center> 소설봇 </center>
+            ## <center> 소설 생성 </center>
+            """
+        )
+        with gr.Accordion(label="사용자 설정"):
+            with gr.Row():
+                with gr.Column(scale=1):
+                    # 2
+                    nb_model=gr.Dropdown(
+                        label="모델 선택",
+                        choices=["gpt-3.5-turbo", "gpt-3.5-turbo-16k", "gpt-4", "gpt-4-32k", "gpt-4-1106-preview"],
+                        value="gpt-4-1106-preview",
+                        interactive=True
+                    )
+                    # 3
+                    nb_temperature=gr.Slider(
+                        label="창의성",
+                        info="숫자가 높을 수록 창의적",
+                        minimum=0,
+                        maximum=2,
+                        step=0.1,
+                        value=1,
+                        interactive=True
+                    )
+                # 4
+                nb_detail=gr.Text(
+                    container=False,
+                    placeholder="소설의 세부적인 설정을 작성합니다.",
+                    lines=8,
+                    scale=4
+                )
+        # 5
+        nb_submit=gr.Button(
+            value="생성하기",
+            variant="primary"
+        )
+        # 6
+        nb_output=gr.Text(
+            label="",
+            placeholder="이곳에 소설의 내용이 출력됩니다.",
+            lines=10,
+            max_lines=200,
+            show_copy_button=True
+        )
+        
+        nb_submit.click(
+            fn=novel_bot,
+            inputs=[nb_model, nb_temperature, nb_detail],
+            outputs=nb_output
+        )
 
 # 레이아웃 end
 app.launch()
